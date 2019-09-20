@@ -5,12 +5,12 @@ BDSCOMMONDIRMAIN = %PUBLIC%\Documents\Embarcadero\Studio
 BUILDEXE = "$(PROGRAMFILES)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\msbuild.exe"
 BUILD = $(BUILDEXE) /t:Rebuild
 
-clean:  
+clean:
   ECHO Project: $(PROJECT) $(EMBARCADERO)
 	DEL /S /Q .\*.HPP
 	DEL /S /Q .\*.DCU
 #TODO: Add demos and package folders
-	 
+
 _XE8: Lib\*.pas "Package\RAD Studio XE8\$(PROJECT)R.dpk" "Package\RAD Studio XE8\$(PROJECT)R.dproj" "Package\RAD Studio XE8\$(PROJECT)D.dpk" "Package\RAD Studio XE8\$(PROJECT)D.dproj"
 	SET BDS=$(STUDIO)\16.0
 	$(BUILD) "Package\RAD Studio XE8\$(PROJECT)R.dproj"
@@ -18,7 +18,7 @@ _XE8: Lib\*.pas "Package\RAD Studio XE8\$(PROJECT)R.dpk" "Package\RAD Studio XE8
 	$(BUILD) /property:Platform=Win64 "Package\RAD Studio XE8\$(PROJECT)R.dproj"
 	$(MAKE) _samples
 
-# build all packahes for Delphi 10.2
+# build all packages for Delphi 10.2
 10_2: Source\*.pas "Packages\RAD Studio 10.2\$(PROJECT)R.dpk" "Packages\RAD Studio 10.2\$(PROJECT)R.dproj" "Packages\RAD Studio 10.2\$(PROJECT)D.dpk" "Packages\RAD Studio 10.2\$(PROJECT)D.dproj"
 	SET BDS=$(STUDIO)\19.0
 	$(BUILD) "Packages\RAD Studio 10.2\$(PROJECT)R.dproj"
@@ -39,7 +39,7 @@ _XE8: Lib\*.pas "Package\RAD Studio XE8\$(PROJECT)R.dpk" "Package\RAD Studio XE8
 	$(BUILD) "Demos\OLE\OLE.dproj"
 
 _samples: "Demos\Advanced\Advanced.exe" "Demos\Minimal\Minimal.exe" "Demos\Objects\Objects.exe" "Demos\OLE\OLE.exe"
-	
+
 _continuousbuilds: clean 10_2
 
 _release:
@@ -47,7 +47,7 @@ _release:
 #It expects the ZIP.EXE from the InfoZip project V3.0 or higher to be in the system's search path
 #Download e.g. from: ftp://ftp.info-zip.org/pub/infozip/win32/
 	ZIP -9 -r .\VirtualTreeView.zip  INSTALL.txt Changes.txt Source Design Packages Demos Contributions Help\VirtualTreeview.chm -i *.pas -i *.dpk -i *.groupproj -i *.dproj -i *.cbproj -i *.hlp -i *.rc -i *.res -i *.cfg -i *.dpr -i *.dof -i *.bpr -i *.dfm -i *.cpp -i *.inc -i *.dcr -i *.chm -i *.png -i *.js -i *.txt -i *.bmp -i *.uni
-	ECHO Source code zip archive "VirtualTreeView.zip" created. 
+	ECHO Source code zip archive "VirtualTreeView.zip" created.
 	ECHO !!!Please ensure that the const TVTVersion is correct!!!
 	ECHO !!!Please add version number to ZIP file name!!!
 	ECHO !!!Please create release at: https://github.com/Virtual-TreeView/Virtual-TreeView/releases
